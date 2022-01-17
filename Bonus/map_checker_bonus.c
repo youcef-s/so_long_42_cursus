@@ -107,7 +107,7 @@ void	check_content(t_map *map)
 			printf("Error\nNumber of players is inconvenient!\n");
 		if (map->snake == 0)
 			printf ("Error\nThe map need at least one enemy!");
-		if(map->exit == 0)
+		if (map->exit == 0)
 			printf("Error\nThe exit is missing!\n");
 		if (map->collect == 0)
 			printf("Error\nNo collectables in the map!\n");
