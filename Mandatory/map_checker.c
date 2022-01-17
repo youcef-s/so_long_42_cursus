@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:16:46 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/01/17 18:13:51 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:24:20 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	check_consistency(t_map *map)
 		if (len != map->width)
 		{
 			printf("Error\nInconsistent map!\n");
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -44,6 +45,7 @@ void	check_walls(t_map *map)
 		if (map->field[0][x] != '1' || map->field[map->height - 1][x] != '1')
 		{
 			printf("Error\nThe walls are not placed properly!\n");
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -53,6 +55,7 @@ void	check_walls(t_map *map)
 		if (map->field[x][0] != '1' || map->field[x][map->width - 1] != '1')
 		{
 			printf("Error\nThe walls are not placed properly!\n");
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -67,6 +70,7 @@ void	helper(t_map *map, int i, int j)
 		&& map->field[i][j] != 'E')
 	{
 		printf("Error\nInvalid character in the map!\n");
+		free (map->field);
 		exit(EXIT_FAILURE);
 	}
 	if (map->field[i][j] == 'P')
@@ -93,19 +97,15 @@ void	check_content(t_map *map)
 		while (++j < map->width)
 			helper(map, i, j);
 	}
-	if (map->player != 1)
+	if (map->player != 1 || map->exit == 0 || map->collect == 0)
 	{
-		printf("Error\nNumber of players is inconvenient!\n");
-		exit(EXIT_FAILURE);
-	}
-	if (map->exit == 0)
-	{
-		printf("Error\nThe exit is missing!\n");
-		exit(EXIT_FAILURE);
-	}
-	if (map->collect == 0)
-	{
-		printf("Error\nNo collectables in the map!\n");
+		if (map->player != 1)
+			printf("Error\nNumber of players is inconvenient!\n");
+		if (map->exit == 0)
+			printf("Error\nThe exit is missing!\n");
+		if (map->collect == 0)
+			printf("Error\nNo collectables in the map!\n");
+		free (map->field);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -119,7 +119,7 @@ void	valid_map(t_map *map, int fd, char *av)
 		map->height++;
 	if (close(fd) == -1)
 	{
-		perror("Error whhile closing the file");
+		perror("Error while closing the file");
 		exit(EXIT_FAILURE);
 	}
 	map->field = (char **)malloc(sizeof(char *) * (map->height + 1));

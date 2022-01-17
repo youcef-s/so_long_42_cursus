@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:16:46 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/01/17 18:16:15 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:36:42 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	check_consistency(t_map *map)
 		if (len != map->width)
 		{
 			printf("Error\nInconsistent map!\n");
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -44,6 +45,7 @@ void	check_walls(t_map *map)
 		if (map->field[0][x] != '1' || map->field[map->height - 1][x] != '1')
 		{
 			printf("Error\nThe walls are not placed properly!\n");
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -53,6 +55,7 @@ void	check_walls(t_map *map)
 		if (map->field[x][0] != '1' || map->field[x][map->width - 1] != '1')
 		{
 			printf("Error\nThe walls are not placed properly!\n");
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -68,6 +71,7 @@ void	helper(t_map *map, int i, int j)
 		&& map->field[i][j] != 'S')
 	{
 		printf("Error\nInvalid character in the map!\n");
+		free (map->field);
 		exit(EXIT_FAILURE);
 	}
 	if (map->field[i][j] == 'P')
@@ -101,12 +105,13 @@ void	check_content(t_map *map)
 	{
 		if (map->player != 1)
 			printf("Error\nNumber of players is inconvenient!\n");
-		else if (map->snake == 0)
+		if (map->snake == 0)
 			printf ("Error\nThe map need at least one enemy!");
-		else if (map->exit == 0)
+		if(map->exit == 0)
 			printf("Error\nThe exit is missing!\n");
-		else if (map->collect == 0)
+		if (map->collect == 0)
 			printf("Error\nNo collectables in the map!\n");
+		free (map->field);
 		exit(EXIT_FAILURE);
 	}
 }
