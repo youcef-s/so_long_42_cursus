@@ -129,6 +129,8 @@ void	valid_map(t_map *map, int fd, char *av)
 		exit(EXIT_FAILURE);
 	}
 	map->field = (char **)malloc(sizeof(char *) * (map->height + 1));
+	if (!map->field)
+		exit(EXIT_FAILURE);
 	fd = open (av, O_RDONLY);
 	while (i < map->height)
 		map->field[i++] = get_next_line(fd);
