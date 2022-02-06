@@ -67,6 +67,7 @@ int	main(int ac, char **av)
 		mlx_hook(map.mlx_win, 17, 0, destroy_window, &map);
 		mlx_hook(map.mlx_win, 2, (1L << 0), key_hook, &map);
 		mlx_loop(map.mlx);
+		free(map.mlx);
 	}
 	printf ("Usage: ./so_long some_map.ber\n");
 }
