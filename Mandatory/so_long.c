@@ -6,11 +6,24 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:02:44 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/01/17 18:23:35 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/02/18 21:45:34 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free (str[i]);
+		i++;
+	}
+	free(str);
+}
 
 void	check_ext(char *fname)
 {

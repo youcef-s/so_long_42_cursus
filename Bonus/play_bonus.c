@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:42:06 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/01/17 19:37:38 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/02/18 21:54:30 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	destroy_window(t_map *map)
 {
-	free (map->field);
+	ft_free(map->field);
 	mlx_destroy_window(map->mlx, map->mlx_win);
 	printf("Closing the window!\n");
 	exit(EXIT_SUCCESS);
@@ -27,7 +27,7 @@ void	ft_exit(t_map *map, int i)
 		printf ("You win!\n");
 	else if (i == 1)
 		printf ("You lose!\n");
-	free (map->field);
+	ft_free(map->field);
 	mlx_destroy_window(map->mlx, map->mlx_win);
 	exit (EXIT_SUCCESS);
 }
