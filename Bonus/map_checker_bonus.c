@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:16:46 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/02/18 21:53:15 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:14:57 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	check_consistency(t_map *map)
 		if (len != map->width)
 		{
 			printf("Error\nInconsistent map!\n");
-			ft_free(map->field);
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -45,7 +45,7 @@ void	check_walls(t_map *map)
 		if (map->field[0][x] != '1' || map->field[map->height - 1][x] != '1')
 		{
 			printf("Error\nThe walls are not placed properly!\n");
-			ft_free(map->field);
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -55,7 +55,7 @@ void	check_walls(t_map *map)
 		if (map->field[x][0] != '1' || map->field[x][map->width - 1] != '1')
 		{
 			printf("Error\nThe walls are not placed properly!\n");
-			ft_free(map->field);
+			free (map->field);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -71,7 +71,7 @@ void	helper(t_map *map, int i, int j)
 		&& map->field[i][j] != 'S')
 	{
 		printf("Error\nInvalid character in the map!\n");
-		ft_free(map->field);
+		free (map->field);
 		exit(EXIT_FAILURE);
 	}
 	if (map->field[i][j] == 'P')
@@ -111,17 +111,15 @@ void	check_content(t_map *map)
 			printf("Error\nThe exit is missing!\n");
 		if (map->collect == 0)
 			printf("Error\nNo collectables in the map!\n");
-		ft_free(map->field);
+		free (map->field);
 		exit(EXIT_FAILURE);
 	}
 }
 
 void	valid_map(t_map *map, int fd, char *av)
 {
-	int		i;
 	char	*line;
 
-	i = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -134,18 +132,7 @@ void	valid_map(t_map *map, int fd, char *av)
 		perror("Error while closing the file");
 		exit(EXIT_FAILURE);
 	}
-	map->field = (char **)malloc(sizeof(char *) * (map->height + 1));
-	if (!map->field)
-		exit(EXIT_FAILURE);
-	fd = open (av, O_RDONLY);
-	while (i < map->height)
-		map->field[i++] = get_next_line(fd);
-	close (fd);
-	i = 0;
-	while (i < map->field[0][i])
-		i++;
-	map->width = i;
-	map->field[map->height] = 0;
+	fill_field(map, av, fd, 0);
 	check_consistency(map);
 	check_walls(map);
 	check_content(map);

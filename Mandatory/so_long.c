@@ -6,11 +6,27 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:02:44 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/02/18 21:45:34 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:13:37 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	fill_field(t_map *map, char *av, int fd, int i)
+{
+	map->field = (char **)malloc(sizeof(char *) * (map->height + 1));
+	if (!map->field)
+		exit(EXIT_FAILURE);
+	fd = open (av, O_RDONLY);
+	while (i < map->height)
+		map->field[i++] = get_next_line(fd);
+	close (fd);
+	i = 0;
+	while (i < map->field[0][i])
+		i++;
+	map->width = i;
+	map->field[map->height] = 0;
+}
 
 void	check_ext(char *fname)
 {

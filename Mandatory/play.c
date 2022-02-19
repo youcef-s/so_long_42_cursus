@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 13:42:06 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/02/18 21:50:09 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:08:59 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	player_moves(t_map *map, int i, int j)
 		else if (map->field[map->p_x + i][map->p_y + j] == 'E' \
 				&& map->collect == 0)
 		{
-			free(map->field);
+			free (map->field);
 			printf("You Win!\n");
 			mlx_destroy_window(map->mlx, map->mlx_win);
 			exit(EXIT_SUCCESS);
