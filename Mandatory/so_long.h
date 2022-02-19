@@ -51,5 +51,4 @@ void	game_init(t_map *map);
 void	map_render(t_map *map, int i, int j);
 int		key_hook(int key_code, t_map *map);
 int		destroy_window(t_map *map);
-void	ft_free(char **str);
 #endif
