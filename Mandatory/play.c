@@ -14,7 +14,7 @@
 
 int	destroy_window(t_map *map)
 {
-	ft_free(map->field);
+	free(map->field);
 	mlx_destroy_window(map->mlx, map->mlx_win);
 	printf("Closing the window!\n");
 	exit(EXIT_SUCCESS);
@@ -30,7 +30,7 @@ void	player_moves(t_map *map, int i, int j)
 		else if (map->field[map->p_x + i][map->p_y + j] == 'E' \
 				&& map->collect == 0)
 		{
-			ft_free(map->field);
+			free(map->field);
 			printf("You Win!\n");
 			mlx_destroy_window(map->mlx, map->mlx_win);
 			exit(EXIT_SUCCESS);
