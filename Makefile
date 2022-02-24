@@ -1,3 +1,5 @@
+NAME = so_long
+
 FLAGS = -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit
 
 INC = Mandatory/so_long.h Mandatory/gnl/get_next_line.h
@@ -15,18 +17,27 @@ SRC = $(addprefix Mandatory/, $(SRC_FILES))
 
 B_SRC = $(addprefix Bonus/, $(B_SRC_FILES))
 
-$(NAME): all
+OBJ = $(SRC:.c=.o)
 
-all: $(SRC) $(INC)
-	cc $(FLAGS) $(SRC) -o so_long
+B_OBJ = $(B_SRC:.c=.o)
 
-bonus: $(B_SRC) $(B_INC)
-	cc $(FLAGS) $(B_SRC) -o so_long_bonus
+all : $(NAME)
+
+$(NAME): $(OBJ) $(INC)
+	cc $(FLAGS) $(OBJ) -o $(NAME)
+
+.c.o : $(SRC) $(B_SRC) $(INC) $(B_INC)
+		cc -c $< -o $(<:.c=.o)
+
+bonus: $(B_OBJ) $(B_INC)
+	cc $(FLAGS) $(B_OBJ) -o $(NAME)
 
 clean:
-	rm -rf so_long so_long_bonus
+	rm -f $(OBJ)
+	rm -f $(B_OBJ)
 
 fclean: clean
+	rm -f $(NAME)
 
 re: fclean all
 
