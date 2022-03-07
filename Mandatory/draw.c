@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 12:42:34 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/02/19 17:07:14 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/03/07 10:07:13 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	game_init(t_map *map)
 		|| !map->texture_wall || !map->texture_worm)
 	{
 		perror("Error with xpm files");
-		free (map->field);
+		ft_free (map->field);
 		exit(EXIT_FAILURE);
 	}
 	map_render(map, -1, -1);

@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:17:16 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/02/19 17:13:49 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/03/07 10:06:36 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	map_render(t_map *map, int i, int j);
 int		key_hook(int key_code, t_map *map);
 int		destroy_window(t_map *map);
 void	fill_field(t_map *map, char *av, int fd, int i);
+void	ft_free(t_map *map);
 #endif

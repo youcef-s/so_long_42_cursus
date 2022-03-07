@@ -6,7 +6,7 @@
 /*   By: ylabtaim <ylabtaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:02:44 by ylabtaim          #+#    #+#             */
-/*   Updated: 2022/02/19 17:15:32 by ylabtaim         ###   ########.fr       */
+/*   Updated: 2022/03/07 10:08:42 by ylabtaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ void	map_init(t_map *map)
 	map->steps = 0;
 	map->snake = 0;
 	map->count = 0;
+}
+
+void	ft_free(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->height)
+	{
+		free (map->field[i]);
+		i++;
+	}
+	free (map->field);
 }
 
 int	main(int ac, char **av)
